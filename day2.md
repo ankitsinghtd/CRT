@@ -1,4 +1,4 @@
-S
+
 Question - Sort 3 numbers in increasing order
 
 (Using max ,smax)
@@ -123,4 +123,151 @@ printf("%d %d %d",min, smax, max);
 - 5 % 0 = run time error
 - 'a' % 'b' = 97
 
-Question : solve 5-7/14*2-15%6*3-7%9*2+15s
+Question : solve 5-7/14*2-15%6*3-7%9*2+15
+
+## unary operators
+### sizeof
+
+```c
+#include <stdio.h>
+
+  
+
+int main(){
+
+int a=10;
+
+printf("%u",sizeof(a++));
+
+printf("%d", a);
+
+return 0;
+
+}
+```
+Output : 4 10
+
+### upcast, downcast
+
+int a = 5.4
+float a = 5 (implicit typecast)
+
+### postfix, prefix
+
+a++, ++a
+
+
+```c
+int a=10;
+
+printf("%d",++a);
+
+printf("\n%d", a);
+```
+Output: 11 11
+```c
+int a=10;
+
+printf("%d",a++);
+
+printf("\n%d", a);
+```
+Output: 10 11
+```c
+int a=10;
+
+int b = ++a;
+
+printf("%d %d", a, b);
+```
+Output: 11 10
+```c
+int a=10;
+
+int b = a++;
+
+printf("%d %d", a, b);
+```
+Output: 11 11
+```c
+int a=5,b=6,c;
+
+c = a++ * b++;
+
+printf("%d %d %d", a, b, c);
+```
+Output: 6 7 30
+```c
+int a=5,b=6,c;
+
+c = ++a * ++b;
+
+printf("%d %d %d", a, b, c);
+```
+Output: 6 7 42
+
+
+## volatile keyword
+- for consistent output independent of compiler
+```c
+volatile int a=5,b;
+
+b = a++ * a++;
+
+printf("%d %d", a, b);
+```
+
+## printf solves expression right to left, prints LEFT TO RIGHT
+
+```c
+int n = 1;
+printf("%d %d", 3*n, n++);
+```
+
+## relational operator
+< > <= >=
+
+## assignment operator (right to left)
+= += -+ /= %=
+
+## equality operator
+== !=
+
+## logical operator
+&& || !
+
+## comma operator
+,
+```c
+int a  = 5;
+if( a> 2, a > 4, a > 7)
+	printf("Hello");
+else
+	printf("Bye");
+```
+- works from LEFT to RIGHT but returns RIGHT MOST VALUE
+- i.e a > 7 = false, prints "Bye"
+## ternary operator
+
+### max out of 4 numbers
+```c
+int a= 5, b =10, c=29, d= 24;
+
+int max = a>b?a>c?a>d?a:d:c>d?c:d:b>c?b>d?b:d:c>d?c:d;
+
+printf("%d",max);
+```
+
+### leap year
+```c
+printf(y%100 == 0 ? (y%400 == 0 ? "leap": "not leap") : (y%4 ==0 ? "leap" : "not leap"));
+```
+
+## bitwise operator
+& and
+| or
+^ xor
+~ one's complement
+<< left shift
+">>" right shift
+
