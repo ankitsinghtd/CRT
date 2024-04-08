@@ -668,3 +668,44 @@ return 0;
 
 }
 ```
+
+
+**A function can return maximum 1 value, but using pointer it can return multiple values
+
+```cpp
+void max_min(int x, int y, int *p1, int *p2) {
+
+if (x>y){
+
+*p1 = x;
+
+*p2 = y;
+
+}
+
+else {
+
+*p1 = y;
+
+*p2 = x;
+
+}
+
+}
+
+int main() {
+
+int a, b, max, min;
+
+cout<<"Enter a and b: "<<endl;
+
+cin>>a>>b;
+
+max_min(a, b, &max, &min);
+
+cout<<"Max: "<<max<<"Min: "<<min;
+
+return 0;
+
+}
+```
