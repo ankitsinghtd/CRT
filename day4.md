@@ -355,3 +355,316 @@ return 0;
 **Demerits of function ?
 - slow
 ## macro function
+- fast execution as there is no "jumping" to another function
+- "code" part is swapped in call
+
+```c
+#define sum(a,b) (a+b) // # = compiler directive
+int main() {
+	cout<<sum(5,6)<<endl;
+	cout<<sum(7,8)<<endl;
+}
+```
+Output: 11 15
+
+** In C++, no need to use macro function, just add inline keyword before function definition
+
+## inline function
+- similar to macro in speed and functionality ("code" swap)
+```cpp
+inline int sum(int a,int b) { //inline keyword
+
+return (a+b);
+
+}
+
+  
+
+int main() {
+
+cout<<sum(5,6)<<endl;
+
+cout<<sum(7,8)<<endl;
+
+return 0;
+
+}
+```
+Output: 11 15
+
+## function overloading (c++)
+- when 2 or more functions having same name but different arguments then it is called as function overloading
+- also called as **polymorphism (functions with same name, different arguments)
+
+```cpp
+int sum(int a,int b) {
+
+return (a+b);
+
+}
+
+  
+
+float sum(float a, float b) {
+
+return a+b;
+
+}
+
+  
+
+int main() {
+
+cout<<sum(5,6)<<endl;
+
+cout<<sum(7.1f,8.4f)<<endl;
+
+return 0;
+
+}
+```
+
+
+*Need to write many functions of same code for different data types
+
+## template keyword
+```cpp
+template<typename T>
+
+  
+T sum (T x, T y) {
+
+	T t;
+
+	t=x+y;
+
+	return t;
+
+}
+
+
+int main() {
+
+	cout<<sum(5,6)<<endl;
+
+	cout<<sum(7.1f,8.4f)<<endl;
+
+	cout<<sum(999999999LL, 99999999LL)<<endl;
+
+	cout<<sum(16, 15)<<endl;
+
+	return 0;
+
+}
+```
+
+**After compilation there will be as many copies of the template function as there are number of different call statements*
+
+In above case, 3 copies (int, float, long long)
+
+## recursion
+- function calling itself
+```cpp
+int i=1;
+
+int main() {
+
+	cout<<"RECURSION;
+
+	i++;
+
+	if(i<=5)
+
+	main();
+
+	return 0;
+
+}
+```
+
+static
+```cpp
+int main() {
+
+	static int i=1;
+
+	cout<<"RECURSION"<<endl;
+
+	i++;
+
+	if(i<=5)
+
+	main();
+
+	return 0;
+
+}
+```
+
+## pointers
+```cpp
+int *a;
+```
+- Pointer is a special variable which can store the address of any other variable
+```cpp
+int a=5;
+int *p;
+p = &a;
+```
+- **Data type of pointer and its variable must be same
+```cpp
+float (*p) (int, int) // pointer to function
+```
+### dereference
+```cpp
+*p=7;
+cout<<a; // Output = 7
+```
+
+```cpp
+int main() {
+
+int a=5;
+
+int *p; //pointer declaration
+
+p = &a; //pointer initialization
+
+*p = 7; //pointer dereferencing
+
+cout<<"Address of a is "<<&a<<endl;
+
+cout<<"Address of a is "<<p<<endl;
+
+cout<<"Value of a is "<<a<<endl;
+
+cout<<"Value of a is "<<*p<<endl;
+
+return 0;
+
+}
+```
+swapping using pointers
+```cpp
+int main() {
+
+int a, b;
+
+int *p1, *p2;
+
+p1 = &a;
+
+p2 = &b;
+
+cout<<"Enter a and b: "<<endl;
+
+cin>>a>>b;
+
+cout<<"Before swap a="<<a<<" b="<<b<<endl;
+
+*p1 = *p2 + *p1 - (*p2 = *p1);
+
+cout<<"After swap a="<<a<<" b="<<b<<endl;
+
+return 0;
+
+}
+```
+
+## call by address
+- not the same as call by reference
+
+```cpp
+void swapp(int* a, int* b) {
+
+int t = *a;
+
+*a = *b;
+
+*b = t;
+
+}
+
+int main() {
+
+int a, b;
+
+cout<<"Enter a and b: "<<endl;
+
+cin>>a>>b;
+
+cout<<"Before swap a="<<a<<" b="<<b<<endl;
+
+swapp(&a, &b);
+
+cout<<"After swap a="<<a<<" b="<<b<<endl;
+
+return 0;
+
+}
+```
+**Pointer requires "extra" memory space
+
+## call by reference
+
+```cpp
+int a=15;
+int &r = a; // reference/alias/nickname (no extra memory required)
+// r = 15
+```
+
+```cpp
+int main() {
+
+int a;
+
+cout<<"Enter a "<<endl;
+
+cin>>a;
+
+int &r = a;
+
+cout<<&a<<endl;
+
+cout<<r<<endl;
+
+cout<<&r<<endl;
+
+cout<<a<<endl;
+
+return 0;
+
+}
+```
+
+swapping with reference
+
+```cpp
+void swapp(int &r1, int &r2) {
+
+int t = r1;
+
+r1 = r2;
+
+r2 = t;
+
+}
+
+int main() {
+
+int a, b;
+
+cout<<"Enter a and b: "<<endl;
+
+cin>>a>>b;
+
+cout<<"Before swap a="<<a<<" b="<<b<<endl;
+
+swapp(a, b);
+
+cout<<"After swap a="<<a<<" b="<<b<<endl;
+
+return 0;
+
+}
+```
