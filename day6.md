@@ -1205,3 +1205,408 @@ return 0;
 }
 
 ```
+
+# structure
+user defined datatype
+- struct/union/enum/class(C++)
+
+```CPP
+struct Date{
+
+int day, month, year;
+
+};
+
+  
+
+struct Time{
+
+int h, m, s;
+
+};
+
+  
+
+struct Address{
+
+int pno;
+
+char lane[20];
+
+char city[20];
+
+};
+
+  
+
+struct Student {
+
+int roll;
+
+Address add;
+
+Date dob;
+
+string name;
+
+};
+```
+
+In C,
+
+```c
+struct Date dob, doj;
+```
+
+OR
+
+```c
+typedef struct Date{
+	// stuff
+}dt;
+
+dt dob, doj;
+```
+
+In C++,
+
+```cpp
+struct Date{
+
+int day, month, year;
+
+}; // semicolon is must
+
+  
+
+int main() {
+
+Date dob, doj; // 12 bytes for each object (4x3)
+
+dob.day = 1;
+
+dob.month = 1;
+
+dob.year = 2000;
+
+doj.day = 2;
+
+doj.month = 2;
+
+doj.year = 2020;
+
+cout<<"Date of Birth is "<<dob.day<<"/"<<dob.month<<"/"<<dob.year<<endl;
+
+cout<<"Date of Joining is "<<doj.day<<"/"<<doj.month<<"/"<<doj.year<<endl;
+
+return 0;
+
+}
+```
+
+Example 2:
+```cpp
+struct Student{
+
+int roll;
+
+string name;
+
+float per;
+
+};
+
+int main() {
+
+Student s1, s2;
+
+cout<<"Enter roll no, name and percentage of Student 1: ";
+
+cin>>s1.roll>>s1.name>>s1.per;
+
+cout<<"Enter roll no, name and percentage of Student 2: ";
+
+cin>>s2.roll>>s2.name>>s2.per;
+
+if(s1.per > s2.per)
+
+cout<<s2.name<<" is bad student according to society";
+
+else if(s2.per > s1.per)
+
+cout<<s1.name<<" is bad student according to society";
+
+else
+
+cout<<"both students have bright future according to society";
+
+return 0;
+
+}
+```
+
+**+, - don't work on struct objects
+= however does work
+
+Initialising a struct object
+```cpp
+Student s[3]={{101,"ajaykumar", 54.6}, {102,"vijaykumar", 84.6}, {103,"gaurav", 67.6}};
+```
+- similar to array, partially initialising object results in 0
+
+
+## padding
+```cpp
+struct Abc{
+
+int roll;
+
+char c;
+
+}a1;
+
+int main() {
+
+cout<<sizeof(a1);
+
+return 0;
+
+}
+```
+Output: 8
+
+```cpp
+struct Abc{
+
+int roll;
+
+char c;
+
+char y;
+
+char z;
+
+char x;
+
+}a1;
+```
+Output: also 8
+
+```cpp
+struct Abc{
+
+int roll;
+
+char c;
+
+char y;
+
+char z;
+
+char x;
+
+}a1;
+```
+Output: 12 !!?>??!!?>!?>!>?!
+
+
+
+## Swapping objects
+
+By reference
+
+```cpp
+struct Complex {
+
+int real;
+
+int imag;
+
+};
+
+void swapp(Complex &c1, Complex &c2){
+
+Complex t=c1;
+
+c1 = c2;
+
+c2 = t;
+
+}
+
+int main() {
+
+Complex c1, c2;
+
+c1.real = 5; c1.imag = 23;
+
+c2.real = 2; c2.imag = 8;
+
+swapp(c1, c2);
+
+cout<<c1.real<<" + "<<c1.imag<<"i"<<endl;
+
+cout<<c2.real<<" + "<<c2.imag<<"i"<<endl;
+
+return 0;
+
+}
+```
+
+By Address
+
+```cpp
+struct Complex {
+
+int real;
+
+int imag;
+
+};
+
+void swapp(Complex *c1, Complex *c2){
+
+Complex t=*c1;
+
+*c1 = *c2;
+
+*c2 = t;
+
+}
+
+int main() {
+
+Complex c1, c2;
+
+c1.real = 5; c1.imag = 23;
+
+c2.real = 2; c2.imag = 8;
+
+swapp(&c1, &c2);
+
+cout<<c1.real<<" + "<<c1.imag<<"i"<<endl;
+
+cout<<c2.real<<" + "<<c2.imag<<"i"<<endl;
+
+return 0;
+
+}
+```
+
+## Arrow operator
+structure and pointer
+
+```cpp
+struct Student {
+
+int roll;
+
+}s1, *p; // s1 gets 4 bytes (for int) and p gets 4 bytes (for address)
+
+  
+	
+int main() {
+
+p = &s1;
+
+s1.roll = 5; // standard stuff
+
+// *p.roll = 6 (error, '.' has higher precedence)
+
+(*p).roll = 6; // big brain stuff
+
+p->roll = 8; // godly stuff
+
+// pointer -> member = value;
+
+return 0;
+
+}
+```
+
+Swap re-imagined using pointer
+```cpp
+#include <iostream>
+
+#include <string>
+
+using namespace std;
+
+  
+
+struct Complex
+
+{
+
+  
+
+int real;
+
+  
+
+int imag;
+
+};
+
+  
+
+void swapp(Complex *c1, Complex *c2)
+
+{
+
+  
+
+int t=c1->real;
+
+c1->real = c2->real;
+
+c2->real = t;
+
+t = c1->imag;
+
+c1->imag = c2->imag;
+
+c2->imag = t;
+
+}
+
+  
+
+int main()
+
+{
+
+  
+
+Complex c1, c2;
+
+  
+
+c1.real = 5;
+
+c1.imag = 23;
+
+  
+
+c2.real = 2;
+
+c2.imag = 8;
+
+  
+
+swapp(&c1, &c2);
+
+  
+
+cout << c1.real << " + " << c1.imag << "i" << endl;
+
+  
+
+cout << c2.real << " + " << c2.imag << "i" << endl;
+
+  
+
+return 0;
+
+}
+```
