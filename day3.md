@@ -219,6 +219,7 @@ printf("\n");
 ```
 
 print letter X:
+- leetcode 1572, 2312
 ```c
 for(i=1;i <=n; i++){
 
