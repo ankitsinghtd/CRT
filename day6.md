@@ -154,6 +154,149 @@ return 0;
 - stricmp (ignore case and compare)
 - strstr (searching)
 
+Master program for all string class usage
+
+```cpp
+
+#include<iostream>
+#include<string>
+using namespace std;
+int main(){
+    string str1("first string");
+
+    for(auto it1=str1.begin(); it1!=str1.end(); it1++)
+       	cout << *it1;
+    cout << endl;
+
+    for(auto it2=str1.rbegin(); it2!=str1.rend(); it2++)
+       	cout << *it2;
+    cout << endl;
+
+    for(auto it3=str1.cbegin(); it3!=str1.end(); it3++)
+       	cout << *it3;
+    cout << endl;
+
+    for(auto it4=str1.crbegin(); it4!=str1.rend(); it4++)
+       	cout << *it4;
+    cout << endl;
+
+    string s0("Matrix Computers");
+    string s1;
+    cout<<s1<<endl;         //No output
+    string s2(s0);          //copy one string object into another
+    cout<<s2<<endl;         //Matrix Computers
+    string s3(s0, 7, 4);    //index,count
+    cout<<s3<<endl;         //Comp
+    string s4 ("Matrix Computers"); //copy c style string
+    cout<<s4<<endl;         //Matrix Computers
+    string s5 ("Matrix Computers", 6);  //copy First 6 characters
+    cout<<s5<<endl;         //Matrix
+    string s6(10, '*');     //copy * 10 times
+    cout<<s6<<endl;         //**********
+    string s7(s0.begin(), s0.begin()+6);
+    cout<<s7<<endl;         //Matrix
+
+    string s8("Matrix");
+    string s9("Computers");
+    cout<<s8.length()<<endl;//6
+    cout<<s8.size()<<endl;//6
+
+	s8.swap(s9);
+	//or
+    //swap(s8,s9);
+    cout<<s8<<endl;//Computers
+    cout<<s9<<endl;//Matrix
+
+    char c[10];
+    s9.copy(c,3,0);
+    cout<<c<<endl;//Mat
+				
+    string s10;
+    cout<<"Enter a line:";
+    getline(cin,s10);
+    cout<<s10<<endl;
+
+    string s11("Matrix");
+    s11.pop_back();
+    cout<<s11<<endl;//Matri
+    s11.push_back('x');
+    cout<<s11<<endl;//Matrix
+    cout<<s11.front()<<endl;//M
+    cout<<s11.back()<<endl;//x
+    cout<<s11.at(0)<<endl;//M
+    cout<<s11[0]<<endl;//M
+    s11+=" Computers";
+    //or
+    //s11.append(" Computers")
+    cout<<s11<<endl;//Matrix Computers
+    string s12;
+    //s12=s11;
+    //or
+    s12.assign(s11);
+    cout<<s12<<endl;//Matrix Computers
+
+	string s13("Matrix");
+	cout<<s13.substr(2,3)<<endl;//tri
+	cout<<s13.substr(2)<<endl;//trix
+    s13.insert(3,"...");
+    cout<<s13<<endl;//Mat...rix
+    s13.replace(3,3,"###");
+    cout<<s13<<endl;//Mat###rix
+    s13.erase(3,3);
+    cout<<s13<<endl;//Matrix
+    cout<<s13.empty()<<endl;//0(false)
+    s13.clear();
+    cout<<s13.empty()<<endl;//1(true)
+
+
+  	string s14("ajay");
+    string s15("ravi");
+    int ans=s14.compare(s15);
+    if(ans > 0 )
+        cout<<"String first is greater"<<endl;
+    else if(ans < 0 )
+        cout<<"String second is greater"<<endl;
+    else if(ans==0)
+        cout<<"Both are equal"<<endl;
+
+    if(s14 > s15 )
+        cout<<"String first is greater"<<endl;
+    else if(s14 < s15 )
+        cout<<"String second is greater"<<endl;
+    else if(s14==s15)
+        cout<<"Both are equal"<<endl;
+
+    string s16 = "Matrix Computers";
+    cout<<s16<<endl;
+    s16.resize(6);
+    cout<<s16<< endl;
+
+    string s17("it is a is and is");
+    string s18("is");
+    int pos=s17.find(s18);
+	if(pos != string::npos)    //npos is -1
+		cout<<"Found at "<<pos<<endl;
+	else
+		cout<<"Not found"<<endl;
+
+    pos=s17.rfind(s18);
+	if(pos != string::npos)    //npos is -1
+		cout<<"Found at "<<pos<<endl;
+	else
+		cout<<"Not found"<<endl;
+
+    string s19("");
+    cout<<s19.capacity()<<endl;   //15
+    s19.append("1234567890123456");
+    cout<<s19.capacity()<<endl;   //30
+    s19.append("789012345678901");
+    cout<<s19.capacity()<<endl;   //60
+    s19.shrink_to_fit();
+    cout<<s19.capacity()<<endl;     //31
+    return(0);
+}
+```
+
 
 ```cpp
 int main() {
