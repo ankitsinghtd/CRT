@@ -567,6 +567,11 @@ return 0;
 }
 ```
 
+
+
+**Instantiated = Object Created*
+
+
 # Features of OOPS
 - Object (Anything that has existence in real world or real world enitity. Objects share some properties)
 - Class is a group of similar type of objects to store common properties of all the objects
@@ -574,3 +579,319 @@ return 0;
 - Data Abstraction - to hide the internal complex details of a class from external object
 - Encapsulation - Bundling of member variables (data) as well as member functions (operations) together in a class as a single unit.
 
+# this pointer/keyword
+- "this" is a pointer
+- "this" is a keyword
+- stores address of the function calling object
+- every class contains only one "this" irrespective of number of objects
+- this is static member of class (only one copy)
+
+```cpp
+class Student
+
+{
+
+private:
+
+int roll;
+
+string name;
+
+  
+
+public:
+
+  
+
+void getData()
+
+{
+
+cin>>this->roll; // same as cin>>roll; (this-> is automatically "applied")
+
+cin>>this->name;
+
+}
+
+  
+
+void display()
+
+{
+
+cout << roll << "\t" << name << endl;
+
+}
+
+};
+
+  
+
+int main()
+
+{
+
+Student s1, s2;
+
+cout << "Enter Roll no\tName" << endl;
+
+s1.getData();
+
+s2.getData();
+
+s1.display();
+
+s2.display();
+
+return 0;
+
+}
+```
+
+1. Function call also sends object address (**message passing**) (call by address)
+2. Object address is received by 'this'
+3. this-> is applied before each variable
+
+## explicit use of this
+
+when local var(arg) name = member name
+- instance variable hiding 
+```cpp
+void setData(int roll, string name)
+
+{
+
+roll = roll; // both roll are local
+
+name = name; // both name are local
+
+}
+```
+
+Using this explicitly
+
+```cpp
+void setData(int roll, string name)
+
+{
+
+this->roll = roll;
+
+this->name = name;
+
+}
+```
+
+
+
+```cpp
+int x = 2;
+
+class A
+
+{
+
+int x;
+
+  
+
+public:
+
+void f1()
+
+{
+
+x=5; // member variable
+
+int x=10; // local variable
+
+cout<<x<<endl; // 10 (local priority >)
+
+cout<<this->x<<endl; // 5 (this keyword to access member)
+
+cout<<::x<<endl; // 2 (scope resolving global x)
+
+}
+};
+```
+# inline (again?)
+
+- Functions outside class need manual "inline-ing"
+
+```cpp
+inline void f2() {
+
+// outside the class
+
+// manually defining if inline or not
+
+}
+```
+
+
+- Functions inside class (member functions) are automatically inline
+
+```cpp
+class B{
+
+void f3() {
+
+// defined inside the class
+
+// so automatically becomes inline
+
+}
+
+}
+```
+
+
+- to make class functions not inline, define outside the class and use scope resolution
+
+
+```cpp
+class A
+
+{
+
+int x, y;
+
+void getData();
+
+void display();
+
+};
+
+inline void A::getData()
+
+{
+
+cout << "Enter 2 integers: ";
+
+cin >> x >> y;
+
+}
+
+  
+
+void A::display()
+
+{
+
+cout << x << "\t" << y << endl;
+
+}
+```
+# STL
+## vector and map
+### array 
+
+```cpp
+#include<iostream>
+
+#include<array>
+
+using namespace std;
+
+int main()
+
+{
+
+array<int,5> a1 = {23,151,6,436,2};
+
+for(int e:a1){
+
+cout<<e<<"\t";
+
+}
+
+a1.fill(69);
+
+for(int e:a1){
+
+cout<<e<<"\t";
+
+}
+
+cout<<endl;
+
+return 0;
+
+}
+```
+
+```cpp
+cout<<a1.size();
+```
+
+### vector
+
+```cpp
+#include<iostream>
+
+#include<vector>
+
+using namespace std;
+
+int main()
+
+{
+
+vector<int> v1 = {10, 20, 30};
+
+v1.insert(v1.begin(), 5);
+
+v1.push_back(40);
+
+v1.insert(v1.begin()+2, 15);
+
+for(int e:v1)
+
+cout<<e<<"\t";
+
+cout<<endl;
+
+for(vector <int>::iterator itr = v1.begin(); itr!=v1.end(); itr++){ // OR for(auto itr=v1.begin().....)
+
+cout<<(*itr)++<<"\t";
+
+}
+
+cout<<endl;
+
+for(vector <int>::reverse_iterator itr = v1.rbegin(); itr!=v1.rend(); itr++){
+
+cout<<(*itr)++<<"\t";
+
+}
+
+cout<<endl;
+
+for(vector <int>::const_iterator itr = v1.cbegin(); itr!=v1.cend(); itr++){
+
+cout<<*itr<<"\t";
+
+}
+
+cout<<endl;
+
+for(vector <int>::const_reverse_iterator itr = v1.crbegin(); itr!=v1.crend(); itr++){
+
+cout<<*itr<<"\t";
+
+}
+
+cout<<endl;
+
+return 0;
+
+}
+```
+
+#### vector initialization
+```cpp
+vector<int> v1 = {10,20,30,40,50};
+vector<int> v1(5);
+vector<int> v1(5, 10);
+vector<int> v1 = v2;
+```
